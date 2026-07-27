@@ -4,29 +4,30 @@ const ChatBox = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(false); // NEW state
+  const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const newMessages = [...messages, { role: "user", content: input }];
     setMessages(newMessages);
-    setLoading(true); // show typing indicator
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({ message: input }) 
       });
 
       const data = await res.json();
+
       setMessages([...newMessages, { role: "assistant", content: data.reply }]);
     } catch (err) {
       console.error("❌ Error:", err);
     }
 
-    setLoading(false); // hide typing indicator
+    setLoading(false);
     setInput("");
   };
 
@@ -42,7 +43,7 @@ const ChatBox = () => {
 
   return (
     <div style={{ width: "500px", margin: "40px auto", fontFamily: "Arial, sans-serif" }}>
-      <h2>🤖 AI Chatbot</h2>
+      <h2>🤖 Cohere Chatbot</h2>
 
       {/* Live Chat Window */}
       <div style={{ border: "1px solid #ccc", padding: "10px", height: "250px", overflowY: "auto", background: "#f9f9f9" }}>
@@ -90,5 +91,3 @@ const ChatBox = () => {
 };
 
 export default ChatBox;
-
-
