@@ -6,6 +6,9 @@ const ChatBox = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Helper: get token from localStorage
+  const getToken = () => localStorage.getItem("token");
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -16,7 +19,10 @@ const ChatBox = () => {
     try {
       const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getToken()}`
+        },
         body: JSON.stringify({ message: input })
       });
 
@@ -32,7 +38,11 @@ const ChatBox = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/chat/history");
+      const res = await fetch("http://localhost:5000/api/chat/history", {
+        headers: {
+          "Authorization": `Bearer ${getToken()}`
+        }
+      });
       const data = await res.json();
       setHistory(data);
     } catch (err) {
@@ -157,4 +167,3 @@ const ChatBox = () => {
 };
 
 export default ChatBox;
-
