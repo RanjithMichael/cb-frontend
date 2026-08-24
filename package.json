@@ -39,7 +39,13 @@
     ]
   },
   "allowScripts": {
-    "core-js@3.49.0": true,
-    "core-js-pure@3.49.0": true
+    "core-js@3.50.0": true,
+    "core-js-pure@3.50.0": true
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "autoprefixer": "^10.5.4",
+    "tailwindcss": "^4.3.3"
   }
 }
+

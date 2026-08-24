@@ -11,8 +11,12 @@ function App() {
         {/* Default route */}
         <Route path="/" element={<Login />} />
 
+        {/* Auth routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
+
+        {/* Protected chat route */}
         <Route
           path="/chat"
           element={
@@ -27,4 +31,3 @@ function App() {
 }
 
 export default App;
-
