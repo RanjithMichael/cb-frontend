@@ -3,20 +3,18 @@ import ChatBox from "./components/ChatBox";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
-        {/* Default route */}
         <Route path="/" element={<Login />} />
-
-        {/* Auth routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
-
-        {/* Protected chat route */}
         <Route
           path="/chat"
           element={
@@ -26,8 +24,11 @@ function App() {
           }
         />
       </Routes>
+      {/* Toast container at the bottom */}
+      <ToastContainer position="top-right" autoClose={2000} />
     </Router>
   );
 }
 
 export default App;
+

@@ -1,6 +1,8 @@
-import { useState } from "react";
+
+      import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -16,10 +18,14 @@ const Register = () => {
         email,
         password,
       });
-      alert("Registration successful! Please login.");
+
+      // ✅ Show success toast
+      toast.success("🎉 Registration successful! Please login.");
+
       navigate("/login");
     } catch (err) {
-      alert("Registration failed");
+      // ❌ Show error toast
+      toast.error("Registration failed. Please try again.");
     }
   };
 

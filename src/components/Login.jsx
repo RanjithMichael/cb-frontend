@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,9 +16,16 @@ const Login = () => {
     try {
       const res = await axios.post("https://cb-backend-3xii.onrender.com/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
+
+      // ✅ Show success toast
+      toast.success("🎉 Login successful!");
+
       navigate("/chat");
     } catch (err) {
       setError("Invalid email or password. Please try again.");
+
+      // ❌ Show error toast
+      toast.error("Login failed. Please check your credentials.");
     }
   };
 
@@ -71,4 +79,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
